@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Tree View -->
+  <record id="view_book_tree" model="ir.ui.view">
+    <field name="name">Book Tree View</field>
+    <field name="model">book.model</field>
+    <field name="arch" type="xml">
+      <tree multi_edit='1'>
+        <field name="name" />
+        <field name="description" />
+        <field name="date_availability" />
+        <field name="selling_price" />
+        <field name="bedrooms" />
+        <field name="postcode" optional="1" />
+        <field name="expected_price" optional="1" />
+        <field name="living_area" optional="1" />
+        <field name="facades" optional="1" />
+        <field name="garage" optional="1" />
+        <field name="garden_area" optional="1" />
+        <field name="states" optional="1" />
+        <!-- Add other fields here -->
+      </tree>
+    </field>
+  </record>
+
+  <!-- Form View (Optional) -->
+  <record id="view_book_form" model="ir.ui.view">
+    <field name="name">Book Form View</field>
+    <field name="model">book.model</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group>
+              <field name="name" />
+              <field name="description" />
+              <field name="date_availability" />
+              <field name="selling_price" />
+              <field name="bedrooms" />
+            </group>
+            <group>
+              <field name="postcode" />
+              <field name="expected_price" />
+              <field name="living_area" />
+              <field name="facades" />
+              <field name="garage" />
+              <field name="garden_area" />
+              <field name="states" />
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <!-- Action -->
+  <record id="action_book" model="ir.actions.act_window">
+    <field name="name">Book</field>
+    <field name="res_model">book.model</field>
+    <field name="view_mode">tree,form</field>
+    <!-- Form,Kanban,Calendar ,Graph ,Gantt ,Pivot ,Search
+      ,Activity,Map,Cohort -->
+    <!-- Optionally, set default view_id -->
+    <!-- <field name="view_id" ref="view_book_tree"/> -->
+  </record>
+
+  <!-- Menu Items -->
+  <menuitem id="books_menu" name="Books" parent="shelves_main_menu" action="action_book"
+    sequence="10" />
+
+</odoo>

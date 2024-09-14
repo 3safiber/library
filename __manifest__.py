@@ -1,20 +1,20 @@
 {
-    'name': 'book test',
+    'name': 'Library',
     'version': '1.0',
-    'summary': 'A brief description of my addon',
+    'summary': 'Library',
     'description': """
-    A detailed description of my addon
+      Library
     """,
     'author': 'Salameh',
     'website': '',
-    'category': 'Test addons',  # For example 
+    'category': 'Sales',
     'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',
-        'views/book.xml',
+        'views/base_menu.xml',
+        'views/book_view.xml',
     ],
     'demo': [],
     'application': True,
     'sequence': 1
-    
 }
