@@ -47,11 +47,13 @@
             <group>
               <field name="name" />
               <field name="description" />
-              <!-- <field name="increment" /> -->
+              <field name="increment"
+                readonly="1"
+              />
               <field name="date_availability" />
               <field name="expected_price" />
               <field name="selling_price" />
-              <!-- <field name="deff" /> -->
+              <field name="diff" />
             </group>
             <group>
               <field name="bedrooms" />

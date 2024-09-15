@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 class MyModel(models.Model):
@@ -24,7 +24,11 @@ class MyModel(models.Model):
     
     diff = fields.Float(compute='_compute_diff')
     
-    increment = fields.Integer()
+    increment = fields.Integer(
+      
+      default= 0
+      
+    )
     
     bedrooms =fields.Integer()
     living_area = fields.Integer()
@@ -34,30 +38,30 @@ class MyModel(models.Model):
     
     @api.depends('expected_price', 'selling_price')
     def _compute_diff(self):
-      for record in self:
-        record.diff = record.expected_price - record.selling_price
+        for record in self:
+            record.diff = record.expected_price - record.selling_price
             
     @api.onchange('description')
     def _onchange_description(self):
-      self.increment +=1
+        self.increment +=1
                             
     @api.constrains('bedrooms')
     def _check_bedrooms_valid_number(self):
-      for record in self:
-        if record.bedrooms < 0 or record.bedrooms >= 30:
-          raise ValidationError('please enter a valid number between 0 and 30')    
+        for record in self:
+            if record.bedrooms < 0 or record.bedrooms >= 30:
+                raise ValidationError('please enter a valid number between 0 and 30')    
     
     def action_draft(self):
-      for rec in self:
-        rec.state = 'draft'
+        for rec in self:
+            rec.state = 'draft'
         # rec.write({
         #   'state':'draft'
         # })
         
     def action_bending(self):
-      for rec in self:
-        rec.state = 'bending'
+        for rec in self:
+            rec.state = 'bending'
         
     def action_sold(self):
-      for rec in self:
-        rec.state = 'sold'
+        for rec in self:
+            rec.state = 'sold'
