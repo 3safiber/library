@@ -55,6 +55,7 @@
             </group>
           </group>
         </sheet>
+
         <!-- Add chatter to book form view -->
         <div class="oe_chatter">
           <field name="message_follower_ids" />
