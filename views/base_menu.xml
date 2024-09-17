@@ -3,7 +3,5 @@
   <menuitem id="library_modul_main_menu" name="Library" sequence="1"
     web_icon="book_test,static\description\icon.png"
   />
-  <menuitem id="shelves_main_menu" name="Shelves" parent="library_modul_main_menu"
-    sequence="10" />
 
 </odoo>

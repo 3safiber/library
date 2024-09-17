@@ -1,86 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
   <!-- Tree View -->
   <record id="view_book_tree" model="ir.ui.view">
     <field name="name">Book Tree View</field>
-    <field name="model">book.model</field>
+    <field name="model">library.book</field>
     <field name="arch" type="xml">
-      <tree multi_edit='1'>
+      <tree multi_edit="1" class="header_custom">
         <field name="name" />
-        <field name="description" />
-        <field name="date_availability" />
+        <field name="description" optional='1' />
+        <field name="author" />
+        <field name="publisher" optional='1' />
         <field name="selling_price" />
-        <field name="bedrooms" />
-        <field name="postcode" optional="1" />
-        <field name="expected_price" optional="1" />
-        <field name="living_area" optional="1" />
-        <field name="facades" optional="1" />
-        <field name="garage" optional="1" />
-        <field name="garden_area" optional="1" />
+        <field name="publication_date" />
+        <field name="category_id" optional='1' />
         <field name="state" />
-        <!-- Add other fields here -->
       </tree>
     </field>
   </record>
 
-  <!-- Form View (Optional) -->
+  <!-- Form View -->
   <record id="view_book_form" model="ir.ui.view">
     <field name="name">Book Form View</field>
-    <field name="model">book.model</field>
+    <field name="model">library.book</field>
     <field name="arch" type="xml">
       <form>
-        <sheet>
+        <sheet class='sheet_view'>
           <header>
+            <button name="action_available" string="Set to Available" type="object"
+              class="btn-primary" invisible="state == 'available'" />
 
-            <button name="action_draft" string="Set to draft" type="object"
-              class="btn-primary"
-              invisible="state == 'draft'"
-            />
-            <button name="action_bending" string="Bending" type="object"
-              class="btn-secondary" invisible="state != 'draft'" />
-            <button name="action_sold" string="Sold" type="object"
-              class="btn-success" invisible="state != 'bending'" />
+            <button name="action_reserved" string="Reserved" type="object"
+              class="btn-info" invisible="state != 'available'" />
+
+            <button name="action_borrowed" string="Borrowed" type="object"
+              class="btn-success" invisible="state != 'reserved'" />
+
+            <button name="action_damaged" string="Damaged" type="object"
+              class="btn-danger" invisible="state == 'damaged' or state == 'unavailable'" />
+
             <field name="state" widget="statusbar" />
-
           </header>
           <group>
             <group>
               <field name="name" />
-              <field name="description" />
-              <field name="increment"
-                readonly="1"
-              />
-              <field name="date_availability" />
-              <field name="expected_price" />
+              <field name="author" />
+              <field name="publisher" />
               <field name="selling_price" />
-              <field name="diff" />
             </group>
             <group>
-              <field name="bedrooms" />
-              <field name="postcode" />
-              <field name="living_area" />
-              <field name="facades" />
-              <field name="garage" />
-              <field name="garden_area" />
+              <field name="publication_date" />
+              <field name="category_id" optional='1' />
+              <field name="description" />
             </group>
           </group>
         </sheet>
+        <!-- Add chatter to book form view -->
+        <div class="oe_chatter">
+          <field name="message_follower_ids" />
+          <field name="activity_ids" />
+          <field name="message_ids" />
+        </div>
       </form>
     </field>
   </record>
+
   <!-- Action -->
   <record id="action_book" model="ir.actions.act_window">
     <field name="name">Book</field>
-    <field name="res_model">book.model</field>
+    <field name="res_model">library.book</field>
     <field name="view_mode">tree,form</field>
-    <!-- Form,Kanban,Calendar ,Graph ,Gantt ,Pivot ,Search
-      ,Activity,Map,Cohort -->
-    <!-- Optionally, set default view_id -->
-    <!-- <field name="view_id" ref="view_book_tree"/> -->
   </record>
 
   <!-- Menu Items -->
-  <menuitem id="books_menu" name="Books" parent="shelves_main_menu" action="action_book"
+  <menuitem id="books_menu" name="Books" parent="library_modul_main_menu" action="action_book"
     sequence="10" />
 
 </odoo>
