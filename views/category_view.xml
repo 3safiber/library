@@ -32,7 +32,11 @@
                   <field name="name" />
                   <field name="author" />
                   <field name="selling_price" />
-                  <field name="state" />
+                  <field name="state" widget="badge"
+                    decoration-success="state == 'available'"
+                    decoration-warning="state == 'reserved'"
+                    decoration-info="state == 'borrowed'"
+                    decoration-muted="state == 'damaged'" />
                 </tree>
               </field>
             </page>
@@ -49,9 +53,22 @@
     <field name="view_mode">tree,form</field>
   </record>
 
+  <!-- Server Actions -->
+  <record id="action_add_book_category"
+    model="ir.actions.server">
+    <field name="name">Add Book</field>
+    <field name="model_id" ref="model_library_category" />
+    <field name="binding_model_id" ref="model_library_category" />
+    <field name="state">code</field>
+    <field name="code">
+      action = records.open_action_book_category()
+    </field>
+  </record>
   <!-- Menu Items -->
   <menuitem id="categorys_menu" name="Categorys" parent="library_modul_main_menu"
     action="action_category"
-    sequence="20" />
+    sequence="20"
+  />
+  <!-- groups="library.library_librarian_group" -->
 
 </odoo>

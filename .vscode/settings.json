@@ -19,5 +19,8 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "#832561",
-  "python.languageServer": "None"
+  "python.languageServer": "None",
+  "cSpell.words": [
+    "المشاكل"
+  ]
 }
